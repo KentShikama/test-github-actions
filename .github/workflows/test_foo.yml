@@ -10,13 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Wait for build to succeed
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-build
+      - name: Wait on tests
+        uses: lewagon/wait-on-check-action@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: deploy
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.ref }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+          running-workflow-name: 'deploy'
+          allowed-conclusions: success,skipped,cancelled
       - name: Check for Modified Depencency Files
         id: diff-check
         run: |

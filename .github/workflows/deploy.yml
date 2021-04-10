@@ -2,8 +2,12 @@ name: deploy
 
 on:
   push:
-  pull_request:
-  workflow_dispatch:
+    branches:
+      - develop
+    paths:
+      - requirements.txt
+      - setup.py
+      - Dockerfile
 
 jobs:
   deploy:

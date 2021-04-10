@@ -9,3 +9,6 @@ runs:
       shell: bash
     - run: echo "Nice to meet you!"
       shell: pwsh
+    - uses: actions/checkout@v2
+    - run: echo "Recurse!"
+      shell: bash

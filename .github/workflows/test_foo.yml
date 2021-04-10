@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-aorta:
+  test-foo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +15,7 @@ jobs:
         id: wait-for-build
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: build
+          checkName: deploy
           ref: ${{ github.sha }}
       - name: Check for Modified Depencency Files
         id: diff-check

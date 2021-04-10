@@ -6,20 +6,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-aorta:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Check for Modified Depencency Files
-        id: diff-check
-        run: |
-          git fetch origin develop --depth=1
-          key_files='requirements.txt\|setup.py\|Dockerfile\|docker/Dockerfile'
-          echo ::set-output name=modified::$(if git diff --name-only --raw origin/develop $GITHUB_SHA | grep -q $key_files; then echo "true"; else echo "false"; fi)
-          echo $GITHUB_BASE_REF
-      - name: Pull Development Image
-        if: steps.diff-check.outputs.modified == 'false'
-        run: echo "No key files modified"
-      - name: Key Files Modified - Building New Image
-        if: steps.diff-check.outputs.modified == 'true'
-        run: echo "Key files modified"
+    - uses: actions/checkout@v2
+    - uses: octocat/say-hello@v1
+      with:
+        name: OctoCat

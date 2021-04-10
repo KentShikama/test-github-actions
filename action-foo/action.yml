@@ -9,6 +9,9 @@ runs:
       shell: bash
     - run: echo "Nice to meet you!"
       shell: pwsh
-    - uses: actions/checkout@v2
     - run: echo "Recurse!"
       shell: bash
+    - name: Run Cypress With Retries on Failures
+      uses: nick-invision/retry@7c68161adf97a48beb850a595b8784ec57a98cbb  # v2.4.0, but using commit hash for security.
+      with:
+        command: ls -al

@@ -17,8 +17,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: deploy
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          intervalSeconds: 10
-          timeoutSeconds: 100
+          intervalSeconds: 15
       - name: Check for Modified Depencency Files
         id: diff-check
         run: |

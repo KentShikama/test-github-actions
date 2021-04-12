@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Wait my build
+      - name: Wait for image deploys
         uses: tomchv/wait-my-workflow@15c168cfa0cf8d5234974e0047908173d3ab39a1  # v1.1
-        id: wait-build
+        id: wait-image-deploys
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: deploy-images

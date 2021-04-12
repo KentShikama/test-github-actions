@@ -9,7 +9,6 @@ jobs:
   test-foo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Wait for image deploys
         uses: tomchv/wait-my-workflow@15c168cfa0cf8d5234974e0047908173d3ab39a1  # v1.1
         id: wait-image-deploys
@@ -18,6 +17,7 @@ jobs:
           checkName: deploy-images
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           intervalSeconds: 15
+      - uses: actions/checkout@v2
       - name: Check for Modified Depencency Files
         id: diff-check
         run: |

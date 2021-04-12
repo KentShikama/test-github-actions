@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Wait my build
-        uses: tomchv/wait-my-workflow@v1.1.0
+        uses: tomchv/wait-my-workflow@15c168cfa0cf8d5234974e0047908173d3ab39a1  # v1.1
         id: wait-build
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: deploy
+          checkName: deploy-images
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           intervalSeconds: 15
       - name: Check for Modified Depencency Files

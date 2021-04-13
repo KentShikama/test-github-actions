@@ -8,6 +8,8 @@ on:
       - requirements.txt
       - setup.py
       - Dockerfile
+      - docker/Dockerfile
+      - docker/entrypoint.sh
 
 jobs:
   deploy-images:

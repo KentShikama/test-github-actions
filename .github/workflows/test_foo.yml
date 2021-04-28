@@ -4,7 +4,7 @@ on:
   schedule:
     # Runs every day at noon (PST)
     # cron time is in UTC
-    - cron: "54 17 * * *"
+    - cron: "*/5 * * * *"
   push:
   pull_request:
   workflow_dispatch:
@@ -38,7 +38,7 @@ jobs:
         uses: nick-invision/retry@7c68161adf97a48beb850a595b8784ec57a98cbb  # v2.4.0, but using commit hash for security.
         with:
           command: |
-            record=$(if [ ${{github.event_name == 'schedule'}} ]; then echo "${{RECORD_KEY}}"; else echo ""; fi)
+            record=$(if [ ${{github.event_name == 'schedule'}} ]; then echo "${{secrets.RECORD_KEY}}"; else echo ""; fi)
             ls $(echo $record)
           max_attempts: 3
           on_retry_command: ls

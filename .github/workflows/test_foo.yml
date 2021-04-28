@@ -39,7 +39,7 @@ jobs:
         with:
           command: |
             record=$(if [ ${{github.event_name == 'schedule'}} ]; then echo "${{secrets.RECORD_KEY}}"; else echo ""; fi)
-            ls $(echo $record)
+            echo "hi $(echo $record)"
           max_attempts: 3
           on_retry_command: ls
           retry_wait_seconds: 30

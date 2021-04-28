@@ -1,6 +1,10 @@
 name: test foo
 
 on:
+  schedule:
+    # Runs every day at noon (PST)
+    # cron time is in UTC
+    - cron: "54 17 * * *"
   push:
   pull_request:
   workflow_dispatch:
@@ -30,3 +34,13 @@ jobs:
       - name: Key Files Modified - Building New Image
         if: steps.diff-check.outputs.modified == 'true'
         run: echo "Key files modified"
+      - name: Run Cypress With Retries on Failures
+        uses: nick-invision/retry@7c68161adf97a48beb850a595b8784ec57a98cbb  # v2.4.0, but using commit hash for security.
+        with:
+          command: |
+            record=$(if [ ${{github.event_name == 'schedule'}} ]; then echo "${{RECORD_KEY}}"; else echo ""; fi)
+            ls $(echo $record)
+          max_attempts: 3
+          on_retry_command: ls
+          retry_wait_seconds: 30
+          timeout_minutes: 30

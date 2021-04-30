@@ -58,6 +58,7 @@ jobs:
         if: ${{ always() && steps.shouldSend.outputs.result == 'true' }}
         run: echo "Hi"
       - name: Debugging logs
+        if: ${{ always() }}
         run: echo ${{ steps.shouldSend.outputs.result }}
 
 

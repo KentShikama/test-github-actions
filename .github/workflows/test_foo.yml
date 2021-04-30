@@ -47,7 +47,7 @@ jobs:
       - name: Report if Job has Succeeded
         id: hasSucceeded
         if: ${{success()}}
-        run: echo "::set-output name=result::true"
+        run: echo "::set-output name=result::false"
       - name: Temp
         if: ${{ always() && steps.hasSucceeded.outputs.result == 'true' }}
         run: echo "Hi"

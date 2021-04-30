@@ -44,3 +44,12 @@ jobs:
           on_retry_command: ls
           retry_wait_seconds: 30
           timeout_minutes: 30
+      - name: Report if Job has Succeeded
+        id: hasSucceeded
+        if: ${{success()}}
+        run: echo "::set-output name=result::true"
+      - name: Temp
+        if: ${{ always() && steps.hasSucceeded.outputs.result == 'true' }}
+        run: echo "Hi"
+
+

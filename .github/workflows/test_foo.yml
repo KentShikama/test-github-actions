@@ -44,12 +44,18 @@ jobs:
           on_retry_command: ls
           retry_wait_seconds: 30
           timeout_minutes: 30
-      - name: Report if Job has Succeeded
-        id: hasSucceeded
-        if: ${{success()}}
-        run: echo "::set-output name=result::false"
+      - name: Evaluate if Slack Message Should be Sent for Success and Failure Flows
+        id: shouldSend
+        if: ${{always()}}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const recovery = false
+            const unexpectedFailure = false
+            const scheduledRun = false
+            return ( recovery || unexpectedFailure || scheduledRun )
       - name: Temp
-        if: ${{ always() && steps.hasSucceeded.outputs.result == 'true' }}
+        if: ${{ always() && steps.shouldSend.outputs.result == 'true' }}
         run: echo "Hi"
 
 

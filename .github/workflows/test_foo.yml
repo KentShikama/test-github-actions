@@ -4,7 +4,7 @@ on:
   schedule:
     # Runs every day at noon (PST)
     # cron time is in UTC
-    - cron: "*/5 * * * *"
+    - cron: "*/30 * * * *"
   push:
   pull_request:
   workflow_dispatch:
@@ -57,5 +57,7 @@ jobs:
       - name: Temp
         if: ${{ always() && steps.shouldSend.outputs.result == 'true' }}
         run: echo "Hi"
+      - name: Debugging logs
+        run: echo ${{ steps.shouldSend.outputs.result }}
 
 

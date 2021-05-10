@@ -1,7 +1,9 @@
+#!/bin/bash
+
 ANNOUNCEMENT_VERSION=1
 ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt
 
-show_message_textedit() {
+message() {
 # Do not indent; bash quirks
 cat << EOF
 ###
@@ -25,7 +27,7 @@ EOF
 if [[ -f $ANNOUNCEMENT_VERSION_FILE && $(< $ANNOUNCEMENT_VERSION_FILE) == "$ANNOUNCEMENT_VERSION" ]]; then
     : # no op; already shown message
 else
-    show_message_textedit
+    message
 
     # Update announcement version so this message will not appear again
     echo $ANNOUNCEMENT_VERSION > ${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt

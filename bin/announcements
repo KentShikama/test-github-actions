@@ -23,7 +23,7 @@ EOF
 }
 
 if [[ -f $ANNOUNCEMENT_VERSION_FILE && $(< $ANNOUNCEMENT_VERSION_FILE) == "$ANNOUNCEMENT_VERSION" ]]; then
-    # Already shown message
+    : # no op; already shown message
 else
     show_message_textedit
 

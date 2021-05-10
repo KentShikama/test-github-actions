@@ -3,17 +3,22 @@ ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT
 if [[ -f $ANNOUNCEMENT_VERSION_FILE && $(< $ANNOUNCEMENT_VERSION_FILE) == "$ANNOUNCEMENT_VERSION" ]]; then
     echo "No new announcements"
 else
-    echo "Hello fellow test-github-actions developers!"
-    echo "In the future, we will use this section to make announcements about
-    any local changes you need to make, e.g., please re-source ~/.bash_profile."
-    echo "For now, let's play a little game (no pressure to participate of course)."
-    echo "Search 'AORTA' on Slack in the #nerds channel."
-    echo "Reply in the thread with a random noun that starts with the letter
+    cat << EOF
+    ###
+    Hello fellow Bright.md engineers!
+    In the future, we will use this section to make announcements about any
+    local changes you need to make.
+
+    For now, let's play a little game (no pressure to participate of course).
+    Search 'AORTA' on Slack in the #nerds channel.
+    Reply in the thread with a random noun that starts with the letter
     corresponding to the number of words in the previous person's word. For
     example, since the first word in the thread is 'AORTA' with 5 letters, the
     second person would put in a word starting with 'E' the 5th letter in the
-    alphabet like 'ELEPHANT'."
-    echo "If someone makes a mistake or the thread becomes confusing, restart with the letter A."
+    alphabet like 'ELEPHANT'.
+    If someone makes a mistake or the thread becomes confusing, restart with the letter A.
+    ###
+    EOF
 
     # Update announcement version so this message will not appear again
     echo $ANNOUNCEMENT_VERSION > ${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt

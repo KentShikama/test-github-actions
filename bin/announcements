@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ANNOUNCEMENT_VERSION=1
+ANNOUNCEMENT_VERSION=2
 ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt
 
 message() {
@@ -8,6 +8,8 @@ message() {
 cat << EOF
 ###
 Hello fellow Bright.md engineers!
+
+This is an updated message.
 
 In the future, we will use this section to make announcements about any
 local changes you need to make.

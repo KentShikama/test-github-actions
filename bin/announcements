@@ -1,7 +1,7 @@
 ANNOUNCEMENT_VERSION=1
 ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt
 
-message() {
+show_message_textedit() {
 temp_file=$(mktemp)
 # Do not indent; bash quirks
 cat << EOF > $temp_file
@@ -27,7 +27,7 @@ open -a TextEdit $temp_file
 if [[ -f $ANNOUNCEMENT_VERSION_FILE && $(< $ANNOUNCEMENT_VERSION_FILE) == "$ANNOUNCEMENT_VERSION" ]]; then
     echo "No new announcements"
 else
-    message
+    show_message_textedit
 
     # Update announcement version so this message will not appear again
     echo $ANNOUNCEMENT_VERSION > ${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt

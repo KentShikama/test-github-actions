@@ -1,7 +1,42 @@
 #!/bin/bash
 
+# To create a new announcement for devs to see locally, please
+# bump the ANNOUNCEMENT_VERSION and edit the message between the ###s. This
+# will only show the latest announcement, so please allow some time for your
+# predecessor's announcement.
+#
+# This requires people to have some kind of shell hook so that when they cd into
+# this repository or git pull a new version of this repo with a new
+# announcement, they will see this message. Only works on Mac OS. Please do
+# not use this for anything besides sending messages.
+#
+# You can assume devs have the following hooks (for bash and zsh respectively):
+#
+# cat >>~/.bash_profile <<EOL
+# preexec () {
+#  if [[ -f "./bin/announcements" ]]; then
+#    ./bin/announcements
+#  fi
+# }
+# preexec_invoke_exec () {
+#    [ -n "$COMP_LINE" ] && return                     # do nothing if completing
+#    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+#    local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`; # obtain the command from the history, removing the history number at the beginning
+#    preexec "$this_command"
+# }
+# trap 'preexec_invoke_exec' DEBUG
+# EOL
+#
+# cat >>~/.zshrc <<EOL
+# preexec() {
+#    if [[ -f "./bin/announcements" ]]; then
+#        ./bin/announcements
+#    fi
+# }
+# EOL
+#
 ANNOUNCEMENT_VERSION=1
-ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt
+ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/.ANNOUNCEMENT_VERSION.txt
 
 message() {
 temp_file=$(mktemp)
@@ -32,5 +67,5 @@ else
     message
 
     # Update announcement version so this message will not appear again
-    echo $ANNOUNCEMENT_VERSION > ${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt
+    echo $ANNOUNCEMENT_VERSION > $ANNOUNCEMENT_VERSION_FILE
 fi

@@ -4,7 +4,7 @@
 # bump the ANNOUNCEMENT_VERSION right below and add to the top of
 # INTERNAL_CHANGELOG.txt.
 
-ANNOUNCEMENT_VERSION=2
+ANNOUNCEMENT_VERSION=3
 
 # This requires people to have some kind of shell hook so that when they cd into
 # this repository or git pull a new version of this repo with a new

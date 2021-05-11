@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # To create a new announcement for devs to see locally, please
-# bump the ANNOUNCEMENT_VERSION and edit the message between the ###s. This
-# will only show the latest announcement, so please allow some time for your
-# predecessor's announcement.
-#
+# bump the ANNOUNCEMENT_VERSION right below and add to the top of
+# INTERNAL_CHANGELOG.txt.
+
+ANNOUNCEMENT_VERSION=2
+
 # This requires people to have some kind of shell hook so that when they cd into
 # this repository or git pull a new version of this repo with a new
 # announcement, they will see this message. Only works on Mac OS. Please do
@@ -35,37 +36,14 @@
 # }
 # EOL
 #
-ANNOUNCEMENT_VERSION=1
-ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/.ANNOUNCEMENT_VERSION.txt
 
-message() {
-temp_file=$(mktemp)
-# Do not indent; bash quirks
-cat << EOF > $temp_file
-###
-Hello fellow Bright.md engineers!
+ANNOUNCEMENT_VERSION_FILE=${HOME}/Brightmd/Aorta/bin/.ANNOUNCEMENT_VERSION.txt
+ANNOUNCEMENT_TEXT_FILE=${HOME}/Brightmd/Aorta/INTERNAL_CHANGELOG.txt
 
-In the future, we will use this section to make announcements about any
-local changes you need to make.
-
-For now, let's play a little game (no pressure to participate of course).
-Search 'AORTA' on Slack in the #nerds channel.
-Reply in the thread with a random noun that starts with the letter
-corresponding to the number of letters in the previous person's word. For
-example, since the first word in the thread is 'AORTA' with 5 letters, the
-second person would put in a word starting with 'E' the 5th letter in the
-alphabet like 'ELEPHANT'.
-If someone makes a mistake or the thread becomes confusing, restart with the letter A.
-###
-EOF
-open -a TextEdit $temp_file
-}
-
-if [[ -f $ANNOUNCEMENT_VERSION_FILE && $(< $ANNOUNCEMENT_VERSION_FILE) == "$ANNOUNCEMENT_VERSION" ]]; then
+if [[ -f $ANNOUNCEMENT_VERSION_FILE && $(< $ANNOUNCEMENT_VERSION_FILE) -ge "$ANNOUNCEMENT_VERSION" ]]; then
     : # no op; already shown message
 else
-    message
-
+    open -a TextEdit $ANNOUNCEMENT_TEXT_FILE
     # Update announcement version so this message will not appear again
     echo $ANNOUNCEMENT_VERSION > $ANNOUNCEMENT_VERSION_FILE
 fi

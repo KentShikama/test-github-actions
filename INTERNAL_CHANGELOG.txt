@@ -1,0 +1,26 @@
+Hello fellow Bright.md engineers!
+
+If you are a member of the content team, please add the following to ~/.bash_profile or
+equivalent:
+```
+export COMPOSE_PROJECT_NAME=aorta
+export COMPOSE_FILE=docker/docker-compose.yml
+```
+
+Otherwise, please add the following to ~/.bash_profile or equivalent:
+
+```
+export COMPOSE_PROJECT_NAME=aorta
+export COMPOSE_FILE=docker/docker-compose.yml:docker/docker-compose.dev.yml
+```
+
+---
+
+Let's play a little game (no pressure to participate of course).
+Search 'AORTA' on Slack in the #nerds channel.
+Reply in the thread with a random noun that starts with the letter
+corresponding to the number of letters in the previous person's word. For
+example, since the first word in the thread is 'AORTA' with 5 letters, the
+second person would put in a word starting with 'E' the 5th letter in the
+alphabet like 'ELEPHANT'.
+If someone makes a mistake or the thread becomes confusing, restart with the letter A.

@@ -1,15 +1,14 @@
 #!/bin/bash
 
-ANNOUNCEMENT_VERSION=2
+ANNOUNCEMENT_VERSION=1
 ANNOUNCEMENT_VERSION_FILE=${HOME}/Documents/test-github-actions/bin/ANNOUNCEMENT_VERSION.txt
 
 message() {
+temp_file=$(mktemp)
 # Do not indent; bash quirks
-cat << EOF
+cat << EOF > $temp_file
 ###
 Hello fellow Bright.md engineers!
-
-This is an updated message.
 
 In the future, we will use this section to make announcements about any
 local changes you need to make.
@@ -17,13 +16,14 @@ local changes you need to make.
 For now, let's play a little game (no pressure to participate of course).
 Search 'AORTA' on Slack in the #nerds channel.
 Reply in the thread with a random noun that starts with the letter
-corresponding to the number of words in the previous person's word. For
+corresponding to the number of letters in the previous person's word. For
 example, since the first word in the thread is 'AORTA' with 5 letters, the
 second person would put in a word starting with 'E' the 5th letter in the
 alphabet like 'ELEPHANT'.
 If someone makes a mistake or the thread becomes confusing, restart with the letter A.
 ###
 EOF
+open -a TextEdit $temp_file
 }
 
 if [[ -f $ANNOUNCEMENT_VERSION_FILE && $(< $ANNOUNCEMENT_VERSION_FILE) == "$ANNOUNCEMENT_VERSION" ]]; then
